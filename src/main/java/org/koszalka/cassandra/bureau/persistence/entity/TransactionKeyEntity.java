@@ -2,7 +2,6 @@ package org.koszalka.cassandra.bureau.persistence.entity;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.data.cassandra.core.cql.Ordering;
 import org.springframework.data.cassandra.core.mapping.PrimaryKeyClass;
 import org.springframework.data.cassandra.core.mapping.PrimaryKeyColumn;
 
@@ -13,25 +12,28 @@ import java.util.UUID;
 import static org.springframework.data.cassandra.core.cql.PrimaryKeyType.PARTITIONED;
 import static org.springframework.data.cassandra.core.cql.Ordering.DESCENDING;
 
-
+/**
+ * Cassandra Database Transactions Key Entity
+ * @author rkoszalka
+ */
 @Getter
 @Setter
 @PrimaryKeyClass
 public class TransactionKeyEntity implements Serializable {
 
     @PrimaryKeyColumn(name = "CPF", type = PARTITIONED)
-    private String cpf;
+    private String CPF;
 
-    @PrimaryKeyColumn(name = "NAM_PERSON", ordinal = 0)
-    private String personName;
+    @PrimaryKeyColumn(name = "TRANSACTION_VALUE", ordinal = 0)
+    private String transactionValue;
 
     @PrimaryKeyColumn(name = "person_id", ordinal = 1, ordering = DESCENDING)
     private UUID id;
 
-    public TransactionKeyEntity(final String cpf, final String personName, final UUID id) {
-        this.cpf = cpf;
+    public TransactionKeyEntity(final String CPF, final String transactionValue, final UUID id) {
+        this.CPF = CPF;
         this.id = id;
-        this.personName = personName;
+        this.transactionValue = transactionValue;
     }
 
 }
