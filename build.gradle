@@ -26,6 +26,7 @@ dependencies {
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	implementation group: 'com.datastax.cassandra', name: 'cassandra-driver-core', version: '4.0.0', ext: 'pom'
 }
 
 test {
