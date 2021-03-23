@@ -2,29 +2,28 @@ package org.koszalka.cassandra.bureau.persistence.entity;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.data.cassandra.core.mapping.Column;
 import org.springframework.data.cassandra.core.mapping.PrimaryKey;
 import org.springframework.data.cassandra.core.mapping.Table;
 
-@Table
 @Getter
 @Setter
+@Table("RA_TRANSACTIONS")
 public class TransactionEntity {
 
     @PrimaryKey
-    private final String id;
-    private final String name;
-    private final int age;
+    private TransactionKeyEntity key;
 
-    public TransactionEntity(String id, String name, int age) {
-        this.id = id;
-        this.name = name;
-        this.age = age;
-    }
+    @Column("DAT_LAST_SEARCH")
+    private String lastSearch;
 
-    @Override
-    public String toString() {
-        return String.format("{ @type = %1$s, id = %2$s, name = %3$s, age = %4$d }", getClass().getName(), getId(),
-                getName(), getAge());
+    @Column
+    private double transactionValue;
+
+    public TransactionEntity(final TransactionKeyEntity key, final String lastSearch, final double transactionValue) {
+        this.key = key;
+        this.lastSearch = lastSearch;
+        this.transactionValue = transactionValue;
     }
 
 }
