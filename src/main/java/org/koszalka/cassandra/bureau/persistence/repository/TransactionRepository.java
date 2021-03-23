@@ -19,19 +19,19 @@ public interface TransactionRepository extends CassandraRepository<TransactionEn
      * @param CPF CPF Number
      * @return List of Transactions by CPF Key.
     */
-    List<TransactionEntity> findByKeyCPF(final String CPF);
+    TransactionEntity findByKeyCPF(final String CPF);
 
     /**
      * @param key_CPF CPF String
      * @param key_transactionValue String
      * @return List of Transactions by CPF key and value greater than transaction value
      */
-    List<TransactionEntity> findByKeyCPFAndKeyTransactionValueGreaterThan(String key_CPF, String key_transactionValue);
+    TransactionEntity findByKeyCPFAndKeyTransactionValueGreaterThan(String key_CPF, String key_transactionValue);
 
     /**
      * @param lastSearch LocalDateTime
-     * @return List of Transactions by CPF key and value greater than transaction value
+     * @return Transaction Entity by CPF key and value greater than transaction value
      */
     @Query(allowFiltering = true)
-    List<TransactionEntity> findByLastSearch(final LocalDateTime lastSearch);
+    TransactionEntity findByLastSearch(final LocalDateTime lastSearch);
 }

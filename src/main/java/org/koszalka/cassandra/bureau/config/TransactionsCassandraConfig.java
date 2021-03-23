@@ -6,6 +6,10 @@ import org.springframework.data.cassandra.config.AbstractCassandraConfiguration;
 import org.springframework.data.cassandra.config.SchemaAction;
 import org.springframework.data.cassandra.repository.config.EnableCassandraRepositories;
 
+/**
+ * Cassandra Database Configuration
+ * @author rkoszalka
+ */
 @Configuration
 @EnableCassandraRepositories
 public class TransactionsCassandraConfig extends AbstractCassandraConfiguration {
