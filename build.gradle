@@ -29,8 +29,24 @@ dependencies {
 	implementation group: 'com.datastax.cassandra', name: 'cassandra-driver-core', version: '4.0.0', ext: 'pom'
 	compile 'io.springfox:springfox-swagger2:2.9.2'
 	compile 'io.springfox:springfox-swagger-ui:2.9.2'
+	id 'com.palantir.docker' version '0.25.0'
+	id 'com.palantir.docker-run' version '0.25.0'
 }
 
 test {
 	useJUnitPlatform()
+}
+
+String imageName = "rkoszalka/data-bureau-credit-score:$version"
+docker {
+	name imageName
+	files "build/libs/${bootJar.archiveFileName.get()}"
+	buildArgs([JAR_FILE: bootJar.archiveFileName.get()])
+}
+
+dockerRun {
+	name project.name
+	image imageName
+	ports '9000:9000'
+	clean true
 }
