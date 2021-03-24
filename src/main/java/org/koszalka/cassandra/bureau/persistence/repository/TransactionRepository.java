@@ -1,37 +1,36 @@
 package org.koszalka.cassandra.bureau.persistence.repository;
 
-import org.koszalka.cassandra.bureau.persistence.entity.TransactionEntity;
-import org.koszalka.cassandra.bureau.persistence.entity.TransactionKeyEntity;
+import org.koszalka.cassandra.bureau.persistence.schema.Transaction;
+import org.koszalka.cassandra.bureau.persistence.schema.TransactionKey;
 import org.springframework.data.cassandra.repository.CassandraRepository;
 import org.springframework.data.cassandra.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 /**
  * Cassandra Database Transactions Repository
  * @author rkoszalka
  */
 @Repository
-public interface TransactionRepository extends CassandraRepository<TransactionEntity, TransactionKeyEntity> {
+public interface TransactionRepository extends CassandraRepository<Transaction, TransactionKey> {
     /**
      * @param CPF CPF Number
      * @return List of Transactions by CPF Key.
     */
-    TransactionEntity findByKeyCPF(final String CPF);
+    Transaction findByKeyCPF(final String CPF);
 
     /**
      * @param key_CPF CPF String
      * @param key_transactionValue String
      * @return List of Transactions by CPF key and value greater than transaction value
      */
-    TransactionEntity findByKeyCPFAndKeyTransactionValueGreaterThan(String key_CPF, String key_transactionValue);
+    Transaction findByKeyCPFAndKeyTransactionValueGreaterThan(String key_CPF, String key_transactionValue);
 
     /**
      * @param lastSearch LocalDateTime
      * @return Transaction Entity by CPF key and value greater than transaction value
      */
     @Query(allowFiltering = true)
-    TransactionEntity findByLastSearch(final LocalDateTime lastSearch);
+    Transaction findByLastSearch(final LocalDateTime lastSearch);
 }

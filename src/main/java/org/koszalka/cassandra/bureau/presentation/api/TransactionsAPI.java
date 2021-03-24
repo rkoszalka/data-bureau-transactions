@@ -4,7 +4,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
-import org.koszalka.cassandra.bureau.persistence.entity.TransactionEntity;
+import org.koszalka.cassandra.bureau.persistence.schema.Transaction;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,7 +28,7 @@ public interface TransactionsAPI {
             @ApiResponse(code = 500, message = "Server error.")
     })
     @GetMapping(produces = "application/json")
-    ResponseEntity<TransactionEntity> getCPFTransactions(@PathVariable String cpfNumber, @PathVariable String searchType
+    ResponseEntity<Transaction> getCPFTransactions(@PathVariable String cpfNumber, @PathVariable String searchType
             , @PathVariable String value);
 
 }

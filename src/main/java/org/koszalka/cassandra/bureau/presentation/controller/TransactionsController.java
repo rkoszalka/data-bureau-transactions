@@ -3,7 +3,7 @@ package org.koszalka.cassandra.bureau.presentation.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.koszalka.cassandra.bureau.facade.TransactionsFacade;
-import org.koszalka.cassandra.bureau.persistence.entity.TransactionEntity;
+import org.koszalka.cassandra.bureau.persistence.schema.Transaction;
 import org.koszalka.cassandra.bureau.presentation.api.TransactionsAPI;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -34,19 +34,19 @@ public class TransactionsController implements TransactionsAPI {
      * @return creditScoreDTO.
      */
     @Override
-    public ResponseEntity<TransactionEntity> getCPFTransactions(@RequestParam String cpfNumber
+    public ResponseEntity<Transaction> getCPFTransactions(@RequestParam String cpfNumber
             , @RequestParam String searchType, @RequestParam String value) {
         if (!StringUtils.hasText(cpfNumber)) {
             log.error("M=getCPFCreditScore, message=CPF number is required");
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
         try {
-            TransactionEntity response = transactionsFacade.getTransactions(cpfNumber, searchType, value);
+            Transaction response = transactionsFacade.getTransactions(cpfNumber, searchType, value);
             if (Objects.isNull(response)) {
                 log.error("M=.getCPFCreditScore, message=Credit score not found for {}", cpfNumber);
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
-            return new ResponseEntity<TransactionEntity>(response, HttpStatus.OK);
+            return new ResponseEntity<Transaction>(response, HttpStatus.OK);
         } catch (InternalError e) {
             log.error("M=getCPFCreditScore, message=Internal Server Error. {}", e.getMessage());
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);

@@ -4,7 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.koszalka.cassandra.bureau.TransactionsApplication;
-import org.koszalka.cassandra.bureau.persistence.entity.TransactionEntity;
+import org.koszalka.cassandra.bureau.persistence.schema.TransactionEntity;
 import org.koszalka.cassandra.bureau.persistence.repository.TransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -29,7 +29,7 @@ public class TransactionControllerTest {
     @MockBean
     private TransactionRepository transactionRepository;
     private final WebApplicationContext webApplicationContext;
-    private org.koszalka.cassandra.bureau.persistence.entity.TransactionEntity TransactionEntity;
+    private org.koszalka.cassandra.bureau.persistence.schema.TransactionEntity TransactionEntity;
     private MockMvc mvc;
 
     @Autowired
@@ -41,11 +41,11 @@ public class TransactionControllerTest {
     void beforeEach() {
         mvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
         when(transactionRepository.findByKeyCPFAndKeyTransactionValueGreaterThan(anyString(),  anyString()))
-                .thenReturn((org.koszalka.cassandra.bureau.persistence.entity.TransactionEntity) TransactionEntity);
+                .thenReturn((org.koszalka.cassandra.bureau.persistence.schema.TransactionEntity) TransactionEntity);
         when(transactionRepository.findByKeyCPF(eq(anyString())))
-                .thenReturn((org.koszalka.cassandra.bureau.persistence.entity.TransactionEntity) TransactionEntity);
+                .thenReturn((org.koszalka.cassandra.bureau.persistence.schema.TransactionEntity) TransactionEntity);
         when(transactionRepository.findByLastSearch(eq(LocalDateTime.now())))
-                .thenReturn((org.koszalka.cassandra.bureau.persistence.entity.TransactionEntity) TransactionEntity);
+                .thenReturn((org.koszalka.cassandra.bureau.persistence.schema.TransactionEntity) TransactionEntity);
     }
 
     @Test()
