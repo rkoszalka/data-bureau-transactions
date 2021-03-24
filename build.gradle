@@ -37,7 +37,7 @@ test {
 	useJUnitPlatform()
 }
 
-String imageName = "rkoszalka/data-bureau-credit-score:$version"
+String imageName = "rkoszalka/data-bureau-transactions:$version"
 docker {
 	name imageName
 	files "build/libs/${bootJar.archiveFileName.get()}"
