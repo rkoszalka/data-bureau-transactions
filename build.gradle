@@ -2,6 +2,8 @@ plugins {
 	id 'org.springframework.boot' version '2.4.4'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'java'
+	id 'com.palantir.docker' version '0.25.0'
+	id 'com.palantir.docker-run' version '0.25.0'
 }
 
 group = 'org.koszalka.cassandra'
@@ -29,8 +31,6 @@ dependencies {
 	implementation group: 'com.datastax.cassandra', name: 'cassandra-driver-core', version: '4.0.0', ext: 'pom'
 	compile 'io.springfox:springfox-swagger2:2.9.2'
 	compile 'io.springfox:springfox-swagger-ui:2.9.2'
-	id 'com.palantir.docker' version '0.25.0'
-	id 'com.palantir.docker-run' version '0.25.0'
 }
 
 test {
